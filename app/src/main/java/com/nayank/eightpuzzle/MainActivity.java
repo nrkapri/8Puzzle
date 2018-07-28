@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(solved) {
 
-           String message = "Congratulations!! The Son of a bitch did it.You took "+moves+" moves.";
+           String message = "Congratulations!! You did it.You took "+moves+" moves.";
             Snackbar.make(this.findViewById(R.id.board), message,Snackbar.LENGTH_SHORT).show();
 
         }
