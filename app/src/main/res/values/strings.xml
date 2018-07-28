@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">Sajao</string>
+    <string name="app_name">8Puzzle</string>
     <string name="action_settings">Cool</string>
+    <string  name="resetMessage">Your board is reset.Go!</string>
     <string name="fuck_this_shit">Fuck This Shit!</string>
+    <string name="invalidMoveMessage">Invalid move!</string>
     <item name="TAG_KEY_1" type="id"/>
     <item name="TAG_KEY_2" type="id"/>
     <item name="TAG_KEY_3" type="id"/>
+
 </resources>

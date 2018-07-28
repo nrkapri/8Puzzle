@@ -1,26 +1,22 @@
-package com.example.root.myapplication;
+package com.example.root.nayank;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+
 public class MainActivity extends AppCompatActivity {
+
 
     Integer[] initarr  = new Integer[8];
     int free_x=0;
@@ -35,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         resetBoard();
         Button resetButton =findViewById(R.id.resetBoard);
-
     }
 
     private void resetBoard() {
@@ -95,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickNumber(View view)
     {
+        //Crouton.cancelAllCroutons();
         Button clickedButton =(Button) view;
 
         int x=  (int)clickedButton.getTag(R.id.TAG_KEY_1);
@@ -123,9 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            Toast myToast = Toast.makeText(this, "Invalid move",
-                    Toast.LENGTH_SHORT);
-            myToast.show();
+            Snackbar.make(view,R.string.invalidMoveMessage,Snackbar.LENGTH_SHORT).show();
         }
 
         ckeckIfSolved();
@@ -148,9 +145,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(solved) {
-            Toast myToast = Toast.makeText(this, "Congratulations!! The Son of a bitch did it.You took "+moves+" moves.",
-                    Toast.LENGTH_LONG);
-            myToast.show();
+
+           String message = "Congratulations!! The Son of a bitch did it.You took "+moves+" moves.";
+            Snackbar.make(this.findViewById(R.id.board), message,Snackbar.LENGTH_SHORT).show();
+
         }
     }
 
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         Button  movecnt =   findViewById(R.id.movesCount);
         movecnt.setText("Moves:"+0);
 
-        new Toast(this).makeText(this,"Your board is reset.Go!",Toast.LENGTH_SHORT).show();
+       Snackbar.make(view, R.string.resetMessage, Snackbar.LENGTH_SHORT).show();
     }
 
     private int populateInitBoard(Integer[] initarr, int[][] board) {
@@ -212,6 +210,12 @@ public class MainActivity extends AppCompatActivity {
         return emptyspace;
     }
 
+    @Override
+    protected void onDestroy() {
+        //Crouton.cancelAllCroutons();
+        super.onDestroy();
+    }
+
     private void generateInitialRandomArray(Integer[] initarr) {
         System.out.println("init array");
 
@@ -233,22 +237,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-     //   getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-       // int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-       // if (id == R.id.action_settings) {
-         //   return true;
-        //}
 
         return  super.onOptionsItemSelected(item);
     }
